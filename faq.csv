@@ -1,0 +1,24 @@
+question,answer,category
+What is the admission process?,Submit the application form online with required documents.,Admission
+What is the last date for admission?,The last date for admission is usually July 31.,Admission
+What is the fee for BSc IT?,"The fee is ₹30,000 per year.",Fees
+Is hostel facility available?,"Yes, hostels are available for both boys and girls.",Facilities
+What are the college timings?,"College runs from 9 AM to 4 PM, Monday to Friday.",General
+Who is the HOD of information technology?,harmaanpreet Maam is the Head of the Department.,Faculty
+How can I get the syllabus?,<a href='/static/syllabus.pdf' target='_blank'>📘 Download Syllabus PDF</a>,Course
+Show me the syllabus,<a href='/static/syllabus.pdf' target='_blank'>📘 Download Syllabus PDF</a>,Course
+When do semester exams start?,Semester exams are held in November and April.,Exams
+Is there a placement cell?,"Yes, the college has an active placement cell.",Facilities
+What companies visit for placement?,"Companies like Infosys, TCS, and Wipro recruit from our campus.",Placement
+What is the contact number of the college office?,You can call the office at 9876543210.,General
+How many semesters are there in BSc IT?,There are 6 semesters in the BSc IT course.,Course
+What is the eligibility for BSc IT?,You must have completed 12th with science stream.,Admission
+Are there any scholarships available?,"Yes, various scholarships are offered based on merit and need.",Fees
+How do I apply for a scholarship?,Scholarship forms can be filled out during admission.,Fees
+Is there a computer lab?,"Yes, there is a well-equipped computer lab.",Facilities
+How can I pay my fees?,You can pay fees online through the student portal.,Fees
+What documents are required for admission?,"10th & 12th marksheets, ID proof, and photo are required.",Admission
+Is there a library in the college?,"Yes, the college has a large library with digital access.",Facilities
+Can I change my elective subject later?,"Yes, elective changes are allowed within the first two weeks.",Course
+Show me the timetable,<a href='/static/timetable.pdf' target='_blank'>📄 Download Timetable PDF</a>,Exams
+What is the timetable?,<a href='/static/timetable.pdf' target='_blank'>📄 Download Timetable PDF</a>,Exams
