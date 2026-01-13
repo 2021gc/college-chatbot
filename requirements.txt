@@ -1,5 +1,7 @@
 flask
 gunicorn
 pandas
+fuzzywuzzy
+python-Levenshtein
 
 
