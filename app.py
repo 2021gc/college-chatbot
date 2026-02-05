@@ -150,8 +150,6 @@ def chat():
                 "• Social Work\n"
                 "• Higher Studies (MA, MBA)"
             )
-
-
         # ---------- FAQ + FALLBACK ----------
         else:
             answer = get_faq_answer(user_input)
@@ -167,3 +165,4 @@ def chat():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
+
