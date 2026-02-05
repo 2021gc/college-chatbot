@@ -70,7 +70,7 @@ def chat():
         elif user_msg == "facilities":
             answer = "🏫 College Facilities:\n• Library\n• Hostel\n• Transport\n• Computer Lab\n• Sports Ground"
 
-                # ---------- FEES ----------
+        # ---------- FEES ----------
         elif "bsc it fees" in user_msg:
             answer = "💰 BSc IT Fees: ₹25,000 per year (subject to change)."
 
@@ -105,14 +105,14 @@ def chat():
 
         elif "sports" in user_msg:
             answer = "🏏 Large sports ground available for cricket, football, and athletics."
-
+         
         elif "medical" in user_msg or "medical facility" in user_msg:
             answer = "🏥 The college provides on-campus medical facilities with first-aid, regular health checkups, and emergency support."
 
         elif "wifi" in user_msg or "wi-fi" in user_msg or "wifi campus" in user_msg:
             answer = "📶 The campus is fully Wi-Fi enabled, providing high-speed internet access for students and staff."
 
- # ---------- COURSE DETAILS ----------
+                # ---------- COURSE DETAILS ----------
         elif "bsc it" in user_msg or "b.sc it" in user_msg:
             answer = (
                 "🎓 BSc IT (Bachelor of Science in Information Technology)\n\n"
@@ -152,7 +152,6 @@ def chat():
             )
 
 
-
         # ---------- FAQ + FALLBACK ----------
         else:
             answer = get_faq_answer(user_input)
@@ -168,4 +167,3 @@ def chat():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
-
