@@ -1,279 +1,194 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>SK College AI Chatbot</title>
 
     <style>
         body {
-            background: #9e9e9e;
-            font-family: Arial, sans-serif;
+            margin: 0;
+            min-height: 100vh;
+            font-family: 'Segoe UI', sans-serif;
+            background: radial-gradient(circle at top, #3b1d5a, #0b0215);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
         }
 
         .container {
-            margin: 30px auto;
-            background: #bdbdbd;
+            width: 420px;
+            background: rgba(255,255,255,0.06);
+            backdrop-filter: blur(14px);
+            border-radius: 25px;
             padding: 20px;
-            border-radius: 20px;
+            box-shadow: 0 0 40px rgba(157,78,221,0.5);
             position: relative;
-
-           width: 520px;      /* FIXED WIDTH */
-
-           
         }
+
         .logo {
             text-align: center;
         }
 
         .logo img {
-            width: 110px;
-            margin-bottom: 10px;
-        }
-
-        /* 🌙 Toggle Button */
-        .theme-toggle {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: #444;
-            color: #fff;
-            border: none;
-            padding: 6px 12px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 13px;
-        }
-
-        h2 {
-            text-align: center;
-            margin-bottom: 15px;
+            width: 90px;
+            margin-bottom: 8px;
         }
 
         .blink-title {
-            color: #ffffff;
-            font-weight: bold;
-            animation: goldGlow 2.5s infinite;
+            text-align: center;
+            color: #c77dff;
+            margin: 8px 0 2px;
         }
 
-        @keyframes goldGlow {
-            0% { text-shadow: 0 0 2px rgba(212,175,55,0.4); }
-            50% { text-shadow: 0 0 8px rgba(212,175,55,0.9); }
-            100% { text-shadow: 0 0 2px rgba(212,175,55,0.4); }
+        .ai-status {
+            text-align: center;
+            font-size: 12px;
+            color: #9dffb0;
+            margin-bottom: 15px;
         }
 
-          .chat-box {
-            background: #eeeeee;
-            padding: 20px;
-            min-height: 250px;   /* BASE SIZE */
-            max-height: 320px;   /* LIMIT */
+        .quick-actions {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .quick-actions button {
+            background: linear-gradient(135deg,#7b2cff,#c77dff);
+            border: none;
+            color: #fff;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .options-box {
+            display: none;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .option-btn {
+            background: rgba(255,255,255,0.15);
+            color: #fff;
+            border: none;
+            padding: 7px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .option-btn:hover {
+            background: rgba(199,125,255,0.4);
+        }
+
+        .chat-box {
+            background: rgba(0,0,0,0.35);
+            border-radius: 20px;
+            padding: 15px;
+            min-height: 260px;
+            max-height: 330px;
             overflow-y: auto;
-            border-radius: 15px;
-
-       }
-        .you, .bot {
-           padding: 10px 14px;
-           margin: 8px 12px;   /* left & right space */
-           border-radius: 18px;
-           font-size: 14px;
-
-           max-width: 75%;     /* THIS IS THE KEY */
-           word-wrap: break-word;
-
         }
 
         .you {
-            background: #dbeafe;
+            background: linear-gradient(135deg,#4361ee,#4895ef);
+            color: #fff;
+            padding: 10px 14px;
+            margin: 8px 0;
+            border-radius: 18px 18px 0 18px;
+            max-width: 75%;
             margin-left: auto;
-            text-align: right;
         }
 
         .bot {
-            background: #e6f4ea;
+            background: linear-gradient(135deg,#9d4edd,#5a189a);
+            color: #fff;
+            padding: 10px 14px;
+            margin: 8px 0;
+            border-radius: 18px 18px 18px 0;
+            max-width: 75%;
         }
 
-        /* 🟢 TYPING INDICATOR */
         .typing {
-            background: #e6f4ea;
-            padding: 10px 14px;
-            margin: 8px;
+            background: rgba(255,255,255,0.15);
+            padding: 8px 14px;
             border-radius: 18px;
             display: inline-flex;
-            align-items: center;
             gap: 6px;
-            font-size: 14px;
+            margin-top: 5px;
         }
 
         .dots span {
             width: 6px;
             height: 6px;
-            background: #555;
+            background: #fff;
             border-radius: 50%;
-            display: inline-block;
             animation: blink 1.4s infinite both;
         }
 
-        .dots span:nth-child(2) { animation-delay: 0.2s; }
-        .dots span:nth-child(3) { animation-delay: 0.4s; }
+        .dots span:nth-child(2){animation-delay:.2s}
+        .dots span:nth-child(3){animation-delay:.4s}
 
         @keyframes blink {
-            0% { opacity: 0.2; }
-            20% { opacity: 1; }
-            100% { opacity: 0.2; }
+            0% {opacity:.2}
+            20% {opacity:1}
+            100% {opacity:.2}
         }
 
         .chat-controls {
-            margin-top: 15px;
+            margin-top: 10px;
             text-align: center;
         }
 
-        select {
-            width: 40%;
-            padding: 8px;
-            border-radius: 10px;
-            border: none;
-            margin-bottom: 15px;
-        }
-
         input[type="text"] {
-            width: 60%;
-            padding: 7px;
-            border-radius: 10px;
-            border: 1px solid #ccc;
-            margin-bottom: 15px;
+            width: 65%;
+            padding: 8px;
+            border-radius: 20px;
+            border: none;
+            outline: none;
         }
 
         .btn-group {
             display: flex;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
+            margin-top: 8px;
         }
 
         .send-btn {
-            background: #4a90e2;
-            color: white;
-            padding: 8px 18px;
-            border-radius: 10px;
+            background: linear-gradient(135deg,#7b2cff,#c77dff);
             border: none;
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 20px;
             cursor: pointer;
         }
 
         .speak-btn {
-            background: #6c5ce7;
-            color: white;
-            padding: 8px 18px;
-            border-radius: 10px;
+            background: linear-gradient(135deg,#06d6a0,#9ef01a);
             border: none;
+            color: #000;
+            padding: 8px 16px;
+            border-radius: 20px;
             cursor: pointer;
         }
 
         .clear-btn {
-            background: #e74c3c;
-            color: white;
-            padding: 6px 14px;
-            border-radius: 10px;
+            background: #ef233c;
             border: none;
+            color: #fff;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin-top: 10px;
             cursor: pointer;
         }
-         .message {
-             max-width: 85%;
-             word-wrap: break-word;
-             padding: 10px;
-             border-radius: 12px;
-        }
-         .bot-message {
-             background: #e8f5e9;
-             color: #000;
-        }
-
-
-        /* 🌑 DARK MODE */
-        body.dark {
-            background: #121212;
-        }
-
-        body.dark .container { background: #1e1e1e; }
-        body.dark .chat-box { background: #2a2a2a; }
-        body.dark .you { background: #1f3a5f; color: #fff; }
-        body.dark .bot,
-        body.dark .typing { background: #1f4f3a; color: #fff; }
-        body.dark select,
-        body.dark input[type="text"] { background: #333; color: #fff; }
-        body.dark .theme-toggle { background: #ddd; color: #000; }
-.ai-status {
-    text-align: center;
-    font-size: 13px;
-    color: #3b82f6;/* goldblack */
-    margin-bottom: 10px;
-    letter-spacing: 0.5px;
-}
-.quick-actions {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-bottom: 10px;
-    flex-wrap: wrap;
-}
-
-.quick-actions span {
-    background: #e0e0e0;
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 12px;
-    cursor: pointer;
-}
-.quick-actions {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin: 10px 0 15px;
-}
-
-.quick-actions button {
-    background: #e0e0e0;
-    border: none;
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 13px;
-    cursor: pointer;
-}
-
-.options-box {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-bottom: 10px;
-    flex-wrap: wrap;
-}
-
-.options-box button {
-    background: #c7d2fe;
-    border: none;
-    padding: 5px 12px;
-    border-radius: 16px;
-    font-size: 12px;
-    cursor: pointer;
-}
-
-.options-box {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    margin: 15px 0;
-}
-
-.option-btn {
-    background: #e3f2fd;
-    border: none;
-    padding: 8px 14px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 13px;
-}
-
-.option-btn:hover {
-    background: #bbdefb;
-}
-
     </style>
 </head>
 
@@ -282,30 +197,23 @@
 <div class="container">
 
     <div class="logo">
-        <img src="/static/college_logo" alt="Logo">
+        <img src="{{ url_for('static', filename='college_logo.png') }}">
     </div>
 
-    <button type="button" class="theme-toggle" id="themeBtn">🌙 Dark</button>
+    <h3 class="blink-title">🎓 SK College AI Assistant</h3>
+    <p class="ai-status">🟢 Online • Ready to Help</p>
 
-    <h2 class="blink-title">🎓 Your 24/7 Digital College Guide 🤖</h2>
-<p class="ai-status">🟢 AI Assistant Online • Ready to help</p>
-<div class="quick-actions">
-    <button onclick="showOptions('fees')">💰 Fees</button>
-    <button onclick="showOptions('courses')">🎓 Courses</button>
-    <button onclick="showOptions('syllabus')">📘 Syllabus</button>
-    <button onclick="showOptions('facilities')">🏫 Facilities</button>
-</div>
+    <div class="quick-actions">
+        <button onclick="showOptions('fees')">💰 Fees</button>
+        <button onclick="showOptions('courses')">🎓 Courses</button>
+        <button onclick="showOptions('syllabus')">📘 Syllabus</button>
+        <button onclick="showOptions('facilities')">🏫 Facilities</button>
+    </div>
 
+    <div id="optionsBox" class="options-box"></div>
 
-<div id="optionsBox" class="options-box" style="display:none;"></div>
-
-
-    <!-- CHAT BOX -->
     <div class="chat-box" id="chatBox">
-<div class="bot">
-🤖 Hello! I’m the official AI Assistant of SK College!!<br>
-           How Can I Help You...?
-</div>
+        <div class="bot">🤖 Hello! How can I help you today?</div>
 
         {% for sender, msg in chat_history %}
             {% if sender == "You" %}
@@ -316,191 +224,72 @@
         {% endfor %}
 
         <div id="typingIndicator" class="typing" style="display:none;">
-            🤖
-            <div class="dots">
-                <span></span><span></span><span></span>
-            </div>
+            🤖 <div class="dots"><span></span><span></span><span></span></div>
         </div>
     </div>
 
-    <!-- INPUT -->
     <form method="post" class="chat-controls" onsubmit="return handleSubmit(event)">
-        <select name="category">
-            <option value="">All Categories</option>
-            <option>Admission</option>
-            <option>Fees</option>
-            <option>Facilities</option>
-            <option>Course</option>
-            <option>Exams</option>
-        </select>
-
-        <input type="text" id="user_input" name="user_input" placeholder="Ask a question..." required>
-
+        <input type="text" id="user_input" name="user_input" placeholder="Ask your question..." required>
         <div class="btn-group">
             <button type="submit" class="send-btn">Send</button>
-            <button type="button" class="speak-btn" id="speakBtn">🎤 Speak</button>
+            <button type="button" class="speak-btn" id="speakBtn">🎤</button>
         </div>
     </form>
 
-    <!-- CLEAR -->
     <form method="post">
         <input type="hidden" name="action" value="clear">
-        <button type="submit" class="clear-btn">🧹 Clear Chat</button>
+        <button class="clear-btn">🧹 Clear Chat</button>
     </form>
 
 </div>
 
 <script>
-    const chatBox = document.getElementById("chatBox");
-    const typingIndicator = document.getElementById("typingIndicator");
+const chatBox = document.getElementById("chatBox");
+const typingIndicator = document.getElementById("typingIndicator");
 
-    chatBox.scrollTop = chatBox.scrollHeight;
+function handleSubmit(e){
+    e.preventDefault();
+    typingIndicator.style.display="inline-flex";
+    setTimeout(()=>e.target.submit(),700);
+}
 
-    function handleSubmit(event) {
-        event.preventDefault();
-        typingIndicator.style.display = "inline-flex";
-        chatBox.scrollTop = chatBox.scrollHeight;
+function showOptions(type){
+    const box=document.getElementById("optionsBox");
+    let opts=[];
+    if(type==="fees") opts=["BSc IT Fees","BCom Fees","BA Fees"];
+    if(type==="courses") opts=["BSc IT","BCom","BA"];
+    if(type==="syllabus") opts=["BSc IT Syllabus","BCom Syllabus","BA Syllabus"];
+    if(type==="facilities") opts=["Library","Computer Lab","Transport","Hostel","WiFi","Medical"];
 
-        setTimeout(() => {
-            event.target.submit();
-        }, 1000);
-
-        return false;
-    }
-
-    // 🌗 THEME
-    const btn = document.getElementById("themeBtn");
-
-    if (localStorage.getItem("theme") === "dark") {
-        document.body.classList.add("dark");
-        btn.textContent = "☀️ Light";
-    }
-
-    btn.addEventListener("click", () => {
-        document.body.classList.toggle("dark");
-        if (document.body.classList.contains("dark")) {
-            localStorage.setItem("theme", "dark");
-            btn.textContent = "☀️ Light";
-        } else {
-            localStorage.setItem("theme", "light");
-            btn.textContent = "🌙 Dark";
-        }
+    box.innerHTML="";
+    opts.forEach(o=>{
+        box.innerHTML+=`<button class="option-btn" onclick="sendOption('${o}')">${o}</button>`;
     });
-</script>
-<script>
-    // ---------- VOICE INPUT ----------
-    const speakBtn = document.getElementById("speakBtn");
-
-    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-        const recognition = new SpeechRecognition();
-
-        recognition.continuous = false;
-        recognition.interimResults = false;
-        recognition.lang = 'en-US';
-
-        speakBtn.addEventListener("click", () => {
-            recognition.start();
-        });
-
-        recognition.onresult = function (event) {
-            const transcript = event.results[0][0].transcript;
-            document.getElementById("user_input").value = transcript;
-            document.querySelector(".send-btn").click();
-        };
-
-        recognition.onerror = function (event) {
-            alert("Voice recognition error: " + event.error);
-        };
-    } else {
-        speakBtn.disabled = true;
-        speakBtn.textContent = "🎤 Not Supported";
-    }
-</script>
-<script>
-function showOptions(type) {
-    const box = document.getElementById("optionsBox");
-    let options = [];
-
-    if (type === "fees") {
-        options = ["BSc IT Fees", "BCom Fees", "BA Fees"];
-    }
-    else if (type === "courses") {
-        options = ["BSc IT", "BCom", "BA"];
-    }
-    else if (type === "syllabus") {
-        options = ["BSc IT Syllabus", "BCom Syllabus", "BA Syllabus"];
-    }
-    else if (type === "facilities") {
-        options = [
-            "📚 Library",
-            "💻 Computer Lab",
-            "🏏 Sports Ground",
-            "🚌 Transport",
-            "🏥 Medical Facility",
-            "📶 Wi-Fi Campus"
-        ];
-    }
-
-    box.innerHTML = "";
-    options.forEach(opt => {
-        box.innerHTML += `
-            <button class="option-btn" onclick="sendOption('${opt}')">
-                ${opt}
-            </button>
-        `;
-    });
-
-    box.style.display = "flex";
+    box.style.display="flex";
 }
-</script>
-</script><script>
-function sendOption(text) {
-    // put option text into input box
-    const input = document.getElementById("user_input");
-    input.value = text.toLowerCase();
 
-
-    // submit the chat form automatically
-    input.closest("form").submit();
-}
-</script>
-<script>
-function sendOptionMessage(option) {
-    const chatBox = document.getElementById("chatBox");
-
-    // User bubble
-    const userDiv = document.createElement("div");
-    userDiv.className = "you";
-    userDiv.innerHTML = "👤 " + option;
-    chatBox.appendChild(userDiv);
-   // Bot response mapping
-     const responses = {
-         "LIBRARY": "📚 Our college library has 20,000+ books, journals, digital resources, and a quiet study environment.",
-         "TRANSPORT": "🚌 College provides safe transport facilities covering major routes with multiple buses.",
-         "HOSTEL": "🏠 Separate hostels for boys and girls with Wi-Fi, food, and 24/7 security.",
-
-        "BSC IT FEES": "💰 BSc IT Fees: ₹25,000 per year (subject to change).",
-        "BCOM FEES": "💰 BCom Fees: ₹20,000 per year.",
-        "BA FEES": "💰 BA Fees: ₹18,000 per year.",
-
-        "BSC IT": "🎓 BSc IT is a 3-year program focused on programming, databases, and networking.",
-        "BCOM": "🎓 BCom focuses on accounting, finance, and business studies.",
-        "BA": "🎓 BA offers humanities subjects like economics, history, and political science."
-      };
-
-    // Bot bubble
-    const botDiv = document.createElement("div");
-    botDiv.className = "bot";
-    const key = option.trim().toUpperCase();
-    botDiv.innerHTML = "🤖 " + (responses[key] || "Please select a valid option.");
-
-    chatBox.appendChild(botDiv);
-
-    chatBox.scrollTop = chatBox.scrollHeight;
+function sendOption(text){
+    document.getElementById("user_input").value=text;
+    document.querySelector(".chat-controls").submit();
 }
 </script>
 
+<script>
+const speakBtn=document.getElementById("speakBtn");
+
+if('webkitSpeechRecognition' in window){
+    const rec=new webkitSpeechRecognition();
+    rec.lang="en-US";
+    rec.onresult=e=>{
+        document.getElementById("user_input").value=e.results[0][0].transcript;
+        document.querySelector(".send-btn").click();
+    };
+    speakBtn.onclick=()=>rec.start();
+}else{
+    speakBtn.disabled=true;
+    speakBtn.textContent="❌";
+}
+</script>
 
 </body>
 </html>
