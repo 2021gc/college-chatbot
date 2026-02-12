@@ -1,28 +1,34 @@
-<script>
+document.addEventListener("DOMContentLoaded", function () {
+
     const chatBox = document.getElementById("chatBox");
     const typingIndicator = document.getElementById("typingIndicator");
 
     // Auto scroll
-    chatBox.scrollTop = chatBox.scrollHeight;
-
-    function handleSubmit(event) {
-        // STOP immediate form submit
-        event.preventDefault();
-
-        // Show typing dots
-        typingIndicator.style.display = "inline-flex";
+    if (chatBox) {
         chatBox.scrollTop = chatBox.scrollHeight;
-
-        // Submit after delay (typing effect)
-        setTimeout(() => {
-            event.target.submit();
-        }, 1000); // 1 second delay
-
-        return false;
     }
 
+    // Form submit with typing effect
+    window.handleSubmit = function (event) {
+        event.preventDefault();
+
+        if (typingIndicator) {
+            typingIndicator.style.display = "inline-flex";
+        }
+
+        if (chatBox) {
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        setTimeout(() => {
+            event.target.submit();
+        }, 1000);
+
+        return false;
+    };
+
     // Voice input
-    function startDictation() {
+    window.startDictation = function () {
         if ('webkitSpeechRecognition' in window) {
             const recognition = new webkitSpeechRecognition();
             recognition.continuous = false;
@@ -32,14 +38,19 @@
             recognition.start();
 
             recognition.onresult = function (event) {
-                document.getElementById('user_input').value =
-                    event.results[0][0].transcript;
+                const input = document.getElementById("user_input");
+                if (input) {
+                    input.value = event.results[0][0].transcript;
+                }
                 recognition.stop();
             };
 
             recognition.onerror = function () {
                 recognition.stop();
             };
+        } else {
+            alert("Speech recognition not supported");
         }
-    }
-</script>
+    };
+
+    
