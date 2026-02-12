@@ -1,24 +1,88 @@
 question,answer,category
-What is the admission process?,Submit the application form online with required documents.,Admission
-What is the last date for admission?,The last date for admission is usually July 31.,Admission
-What is the fee for BSc IT?,"The fee is ₹30,000 per year.",Fees
-Is hostel facility available?,"Yes, hostels are available for both boys and girls.",Facilities
-What are the college timings?,"College runs from 9 AM to 4 PM, Monday to Friday.",General
-Who is the HOD of information technology?,harmaanpreet Maam is the Head of the Department.,Faculty
-How can I get the syllabus?,<a href='/static/syllabus.pdf' target='_blank'>📘 Download Syllabus PDF</a>,Course
-Show me the syllabus,<a href='/static/syllabus.pdf' target='_blank'>📘 Download Syllabus PDF</a>,Course
-When do semester exams start?,Semester exams are held in November and April.,Exams
-Is there a placement cell?,"Yes, the college has an active placement cell.",Facilities
-What companies visit for placement?,"Companies like Infosys, TCS, and Wipro recruit from our campus.",Placement
-What is the contact number of the college office?,You can call the office at 9876543210.,General
-How many semesters are there in BSc IT?,There are 6 semesters in the BSc IT course.,Course
-What is the eligibility for BSc IT?,You must have completed 12th with science stream.,Admission
-Are there any scholarships available?,"Yes, various scholarships are offered based on merit and need.",Fees
-How do I apply for a scholarship?,Scholarship forms can be filled out during admission.,Fees
-Is there a computer lab?,"Yes, there is a well-equipped computer lab.",Facilities
-How can I pay my fees?,You can pay fees online through the student portal.,Fees
-What documents are required for admission?,"10th & 12th marksheets, ID proof, and photo are required.",Admission
-Is there a library in the college?,"Yes, the college has a large library with digital access.",Facilities
-Can I change my elective subject later?,"Yes, elective changes are allowed within the first two weeks.",Course
-Show me the timetable,<a href='/static/timetable.pdf' target='_blank'>📄 Download Timetable PDF</a>,Exams
-What is the timetable?,<a href='/static/timetable.pdf' target='_blank'>📄 Download Timetable PDF</a>,Exams
+What is the admission process?,Admissions are based on merit and application review.,admission
+When does admission start?,Admissions usually start in June.,admission
+Is online admission available?,Yes online admission facility is available.,admission
+What documents are required for admission?,Mark sheets TC ID proof and photos are required.,admission
+Is entrance exam required?,No entrance exam is required for UG courses.,admission
+Can I get admission after 12th?,Yes students can apply after 12th.,admission
+Is management quota available?,No management quota is not available.,admission
+What is the minimum eligibility?,Pass in 12th from a recognized board.,admission
+Is age limit required?,No age limit for UG admission.,admission
+Can I transfer from another college?,Yes with valid documents.,admission
+
+What is BSc IT fees?,BSc IT fees is 25000 per year.,fees
+What is BCom fees?,BCom fees is 20000 per year.,fees
+What is BA fees?,BA fees is 15000 per year.,fees
+Is fees refundable?,Fees are refundable as per college rules.,fees
+Is installment facility available?,Yes fees can be paid in installments.,fees
+Are there any extra charges?,No hidden charges.,fees
+Is scholarship available?,Yes government scholarships are available.,fees
+How to pay fees?,Fees can be paid online or offline.,fees
+Is late fee allowed?,Late fee may include fine.,fees
+Do you provide fee receipt?,Yes official receipt is provided.,fees
+
+Is library available?,Yes a well equipped library is available.,facilities
+Is hostel facility available?,Yes hostel is available for boys and girls.,facilities
+Is transport available?,Yes college buses are available.,facilities
+Is WiFi available?,Yes the campus is fully WiFi enabled.,facilities
+Is medical facility available?,Yes first aid and medical support available.,facilities
+Are computer labs available?,Yes modern computer labs are available.,facilities
+Is sports facility available?,Yes indoor and outdoor sports facilities available.,facilities
+Is cafeteria available?,Yes hygienic cafeteria is available.,facilities
+Is parking available?,Yes parking is available.,facilities
+Is security provided?,Yes campus security is available.,facilities
+
+How are exams conducted?,Exams are conducted semester wise.,exams
+Is internal assessment available?,Yes internal assessments are conducted.,exams
+What is passing criteria?,Minimum 40 percent is required.,exams
+Are re exams allowed?,Yes supplementary exams are allowed.,exams
+How to check exam results?,Results are published on notice board.,exams
+Are practical exams conducted?,Yes practical exams are conducted.,exams
+Is attendance compulsory?,Yes minimum 75 percent attendance required.,exams
+Are exams offline?,Yes exams are conducted offline.,exams
+Is grading system followed?,Yes grading system is followed.,exams
+Is revaluation allowed?,Yes revaluation is allowed.,exams
+
+Is placement available?,Yes placement assistance is provided.,placements
+Which companies visit campus?,IT companies banks and firms visit campus.,placements
+Is internship provided?,Yes internships are provided.,placements
+What is average salary package?,Average package is 2 to 4 LPA.,placements
+Is placement training provided?,Yes training is provided.,placements
+Are mock interviews conducted?,Yes mock interviews are conducted.,placements
+Is resume training given?,Yes resume training is given.,placements
+Is placement compulsory?,Placement is optional.,placements
+Do all students get placed?,Placement depends on performance.,placements
+Is off campus placement supported?,Yes guidance is provided.,placements
+
+Are faculty experienced?,Yes faculty members are experienced.,faculty
+Are teachers qualified?,Most teachers are PG and PhD holders.,faculty
+Are guest lectures conducted?,Yes industry experts visit.,faculty
+Is mentoring available?,Yes mentors are assigned.,faculty
+Are faculty student friendly?,Yes faculty are supportive.,faculty
+Is doubt clearing session available?,Yes doubt sessions are conducted.,faculty
+Are practical trainers available?,Yes trained instructors are available.,faculty
+Are faculty approachable?,Yes faculty are approachable.,faculty
+Is counseling available?,Yes counseling support is available.,faculty
+Do faculty use smart teaching?,Yes smart teaching methods are used.,faculty
+
+What courses are offered?,BSc IT BCom and BA courses are offered.,course
+What is duration of BSc IT?,BSc IT duration is 3 years.,course
+What is duration of BCom?,BCom duration is 3 years.,course
+What is duration of BA?,BA duration is 3 years.,course
+Is syllabus updated?,Yes syllabus is updated regularly.,course
+Is practical training included?,Yes practical training is included.,course
+Is project mandatory?,Yes final year project is mandatory.,course
+Are certifications provided?,Yes certification programs are offered.,course
+Is course university approved?,Yes courses are university approved.,course
+Is credit system followed?,Yes credit based system is followed.,course
+
+Where is the college located?,The college is centrally located.,general
+What are college timings?,College timings are 9 AM to 4 PM.,general
+Is the college co educational?,Yes the college is co educational.,general
+Is anti ragging committee available?,Yes the campus is ragging free.,general
+Is discipline maintained?,Yes strict discipline is followed.,general
+Is uniform required?,Yes uniform is mandatory.,general
+Is ID card compulsory?,Yes ID card is compulsory.,general
+Are cultural events conducted?,Yes cultural events are conducted.,general
+Is NSS available?,Yes NSS unit is available.,general
+Is alumni support available?,Yes alumni support is available.,general
