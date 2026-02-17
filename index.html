@@ -196,10 +196,7 @@
 
 <div class="container">
 
-    <div class="logo">
-        <img src="{{ url_for('static', filename='college_logo.png') }}">
-    </div>
-
+    
     <h3 class="blink-title">🎓 SK College AI Assistant</h3>
     <p class="ai-status">🟢 Online • Ready to Help</p>
 
@@ -289,6 +286,15 @@ if('webkitSpeechRecognition' in window){
     speakBtn.disabled=true;
     speakBtn.textContent="❌";
 }
+</script>
+<script>
+window.onload = function () {
+    const chatBox = document.getElementById("chatBox");
+    chatBox.scrollTo({
+        top: chatBox.scrollHeight,
+        behavior: "smooth"
+    });
+};
 </script>
 
 </body>
