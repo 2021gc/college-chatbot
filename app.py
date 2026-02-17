@@ -2,10 +2,9 @@ from flask import Flask, render_template, request, redirect, jsonify
 import pandas as pd
 from fuzzywuzzy import fuzz
 import time
-from openai import OpenAI
+import requests
 
 app = Flask(__name__)
-
 
 # ----------------- LOAD FAQ -----------------
 faq_data = pd.read_csv("college_faq.csv")
@@ -13,37 +12,56 @@ chat_history = []
 
 # ----------------- FAQ MATCH -----------------
 def get_faq_answer(user_input):
+    user_input = user_input.lower()
+
     best_score = 0
     best_answer = None
 
     for _, row in faq_data.iterrows():
-        question = str(row["question"])
+        question = str(row["question"]).lower()
         answer = str(row["answer"])
-        score = fuzz.ratio(user_input.lower(), question.lower())
 
+        # ✅ 1. DIRECT KEYWORD MATCH (MOST IMPORTANT)
+        if question in user_input:
+            return answer
+
+        # ✅ 2. FUZZY MATCH (BACKUP)
+        score = fuzz.partial_ratio(user_input, question)
         if score > best_score:
             best_score = score
             best_answer = answer
 
-    if best_score >= 60:
-        return best_answer
-    return None
+    # ✅ LOWER THRESHOLD FOR BETTER MATCH
+        if best_score >= 80:
+           print("📘 FAQ MATCHED:", best_score)
+           return best_answer
 
+        print("🤖 USING OLLAMA")
+        return None
 
 # ----------------- CHATGPT FALLBACK -----------------
 def get_ai_answer(user_input):
     try:
-        response = client.responses.create(
-            model="gpt-4.1-mini",
-            input=f"You are a college AI assistant. Answer briefly.\nQuestion: {user_input}"
+        response = requests.post(
+            "http://localhost:11434/api/generate",
+            json={
+                "model": "phi",
+                "prompt": f"Answer in 2 short sentences only.\nQuestion: {user_input}",
+                "stream": False,
+                "keep_alive": "30m",
+                "options": {
+                    "num_predict": 55,
+                    "temperature": 0.3
+                }
+            }
         )
 
-        print("🔥 OpenAI API CALLED")  # debug proof
-        return response.output_text.strip()
+        return response.json()["response"]
 
     except Exception as e:
-        print("❌ OpenAI Error:", e)
-        return "Sorry, AI service is not available right now."
+        print("Error:", e)
+        return "AI not responding."
+
 
 
 # ----------------- ROUTES -----------------
@@ -68,15 +86,30 @@ def chat():
 
         msg = user_input.lower()
 
-        # ----------------- RULE BASED -----------------
-        if msg == "fees":
+        # ----------------- RULE BASED (FIXED ORDER) -----------------
+
+        # ---- SYLLABUS (SPECIFIC FIRST) ----
+        if "bsc it syllabus" in msg:
+            answer = (
+                "BSc IT syllabus includes Programming, Data Structures, "
+                "Database Management, Web Development, Networking and Project Work."
+            )
+
+        elif "bcom syllabus" in msg:
+            answer = (
+                "BCom syllabus includes Accounting, Business Economics, "
+                "Banking, Taxation, Auditing and Financial Management."
+            )
+
+        elif "ba syllabus" in msg:
+            answer = (
+                "BA syllabus includes History, Economics, Political Science, "
+                "Sociology and Elective subjects."
+            )
+
+        # ---- FEES ----
+        elif msg == "fees":
             answer = "Fees details available for BSc IT, BCom and BA."
-
-        elif msg == "courses":
-            answer = "Available courses are BSc IT, BCom and BA."
-
-        elif msg == "facilities":
-            answer = "Facilities include library, hostel, transport, labs and sports."
 
         elif "bsc it fees" in msg:
             answer = "BSc IT fees is ₹25,000 per year."
@@ -86,6 +119,10 @@ def chat():
 
         elif "ba fees" in msg:
             answer = "BA fees is ₹15,000 per year."
+
+        # ---- COURSES ----
+        elif msg == "courses":
+            answer = "Available courses are BSc IT, BCom and BA."
 
         elif "bsc it" in msg:
             answer = (
@@ -103,6 +140,10 @@ def chat():
                 "BA is a 3-year course with careers in civil services, teaching, journalism and MA."
             )
 
+        # ---- FACILITIES ----
+        elif msg == "facilities":
+            answer = "Facilities include library, hostel, transport, labs and sports."
+
         elif "library" in msg:
             answer = "The college library has books, journals and digital resources."
 
@@ -118,13 +159,13 @@ def chat():
         elif "medical" in msg:
             answer = "On-campus medical and first-aid facilities are available."
 
-        # ----------------- FAQ + AI -----------------
+        # ---- FAQ + AI ----
         else:
             answer = get_faq_answer(user_input)
             if not answer:
                 answer = get_ai_answer(user_input)
 
-        time.sleep(0.5)
+        
 
         chat_history.append(("You", user_input))
         chat_history.append(("Bot", answer))
@@ -141,9 +182,14 @@ def voice():
     if not user_input:
         return jsonify({"reply": "I didn't hear anything."})
 
-    answer = get_faq_answer(user_input)
-    if not answer:
-        answer = get_ai_answer(user_input)
+    msg = user_input.lower()
+
+    if "bsc it syllabus" in msg:
+        answer = "BSc IT syllabus includes Programming, DBMS, Web Development and Networking."
+    else:
+        answer = get_faq_answer(user_input)
+        if not answer:
+            answer = get_ai_answer(user_input)
 
     chat_history.append(("You", user_input))
     chat_history.append(("Bot", answer))
@@ -153,4 +199,4 @@ def voice():
 
 # ----------------- RUN -----------------
 if __name__ == "__main__":
-    app.run(debug=True)
+   app.run(debug=False)
